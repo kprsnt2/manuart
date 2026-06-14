@@ -102,7 +102,7 @@ export default function ChatWidget() {
             >
               <CardTitle className="text-lg font-bold flex items-center gap-2 m-0 p-0 text-white">
                 <Bot className="w-5 h-5 text-purple-200" />
-                Ask About Nanu
+                Ask About Manu
               </CardTitle>
               <Button
                 variant="ghost"
@@ -128,12 +128,12 @@ export default function ChatWidget() {
                   >
                     <Bot className="w-8 h-8 text-purple-500" />
                   </div>
-                  <p className="font-semibold text-purple-600 mb-1">Hi there! 👋</p>
+                  <p className="font-semibold text-purple-600 mb-1">Hi there! 👋🎨</p>
                   <p className="text-purple-400">
-                    I know all about Nanu&apos;s adventures! Ask me anything, or send a message to his Dad.
+                    I know all about Manu&apos;s art adventures! Ask me anything about her drawings, or send a message.
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center mt-4">
-                    {["Who is Nanu?", "Tell me a fun fact", "Send a message to Dad"].map((q) => (
+                    {["Who is Manu?", "Tell me about her art", "Send a message"].map((q) => (
                       <button
                         key={q}
                         onClick={() => handleQuickAction(q)}
@@ -180,10 +180,10 @@ export default function ChatWidget() {
                                   }`}
                                 >
                                   {isDone ? (
-                                    <>✓ Message delivered to Dad! 💌</>
+                                    <>✓ Message delivered! 💌</>
                                   ) : (
                                     <>
-                                      <Loader2 className="w-3 h-3 animate-spin" /> Sending to Dad...
+                                      <Loader2 className="w-3 h-3 animate-spin" /> Sending...
                                     </>
                                   )}
                                 </div>
@@ -258,7 +258,7 @@ export default function ChatWidget() {
                   id="chat-input"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Ask about Nanu..."
+                  placeholder="Ask about Manu's art..."
                   className="flex-1 border-purple-200/60 focus-visible:ring-purple-400 bg-white/80 rounded-xl"
                 />
                 <Button

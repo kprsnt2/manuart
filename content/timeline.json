@@ -2,57 +2,50 @@
   {
     "date": "2019-03-25",
     "age": "0",
-    "title": "Nanu is Born! 🎉",
+    "title": "Manu is Born! 🎉",
     "emoji": "👶",
-    "description": "The day the world got a lot more fun. Welcome, Nanu!"
-  },
-  {
-    "date": "2019-03-25",
-    "age": "0 day",
-    "title": "First Smile",
-    "emoji": "😊",
-    "description": "After seeing parents he immediately smiled"
-  },
-  {
-    "date": "2019-11-27",
-    "age": "7 Months",
-    "title": "First Steps",
-    "emoji": "🚶",
-    "description": "Wobbly but determined! Nanu took his first steps today."
+    "description": "The world got a little more colorful. Welcome, Manu!"
   },
   {
     "date": "2020-06-10",
     "age": "1 year",
-    "title": "First Word",
-    "emoji": "🗣️",
-    "description": "Said 'Amma' for the first time. Dad is still waiting for his turn 😅"
+    "title": "First Scribbles ✏️",
+    "emoji": "✏️",
+    "description": "Manu discovered crayons and the walls were never the same again!"
   },
   {
-    "date": "2021-08-15",
+    "date": "2021-03-25",
     "age": "2 years",
-    "title": "Started Talking Non-Stop",
-    "emoji": "💬",
-    "description": "Once he started, he never stopped. Literally. Never. Stopped."
+    "title": "Colors Everywhere!",
+    "emoji": "🌈",
+    "description": "Started recognizing colors and naming them. 'Pink!' was the first favorite."
+  },
+  {
+    "date": "2022-06-01",
+    "age": "3 years",
+    "title": "First Recognizable Drawing",
+    "emoji": "🎨",
+    "description": "Drew a person for the first time! It had a big round face and stick arms. Masterpiece!"
   },
   {
     "date": "2023-06-01",
     "age": "4 years",
-    "title": "First Day of School",
-    "emoji": "🏫",
-    "description": "Big backpack, bigger smile. Nanu conquered school!"
+    "title": "Started Art Class",
+    "emoji": "🖌️",
+    "description": "Manu joined art class and fell in love with painting. Every day was art day!"
   },
   {
     "date": "2024-03-25",
     "age": "5 years",
-    "title": "Turned 5!",
+    "title": "Turned 5 — Art Party!",
     "emoji": "🎂",
-    "description": "Cake, candles, and a wish to become a 'car driver'. Dream big, kiddo!"
+    "description": "Birthday cake shaped like a paint palette. Best party ever!"
   },
   {
     "date": "2025-06-15",
     "age": "6 years",
-    "title": "Lost First Tooth",
-    "emoji": "🦷",
-    "description": "The tooth fairy visited! Nanu negotiated for extra payment. Smart kid."
+    "title": "First Art Exhibition",
+    "emoji": "🖼️",
+    "description": "Manu's drawings were displayed at school! So proud!"
   }
 ]

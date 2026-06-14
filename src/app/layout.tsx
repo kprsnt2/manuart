@@ -12,18 +12,18 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Nanu's World 🌍",
-  description: "A fun digital scrapbook of Nanu's adventures, funny quotes, and memories — created by Dad with love ❤️",
+  title: "Manu's Art World 🎨",
+  description: "A magical showcase of Manu's drawings, paintings, and creative adventures — where art comes alive! 🖌️",
   openGraph: {
-    title: "Nanu's World 🌍",
-    description: "A fun digital scrapbook of Nanu's adventures, funny quotes, and memories — created by Dad with love ❤️",
+    title: "Manu's Art World 🎨",
+    description: "A magical showcase of Manu's drawings, paintings, and creative adventures — where art comes alive! 🖌️",
     type: "website",
-    siteName: "Nanu's World",
+    siteName: "Manu's Art World",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nanu's World 🌍",
-    description: "A fun digital scrapbook of Nanu's adventures, funny quotes, and memories",
+    title: "Manu's Art World 🎨",
+    description: "A magical showcase of Manu's drawings, paintings, and creative adventures",
   },
   alternates: {
     types: {

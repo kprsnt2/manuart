@@ -2,8 +2,8 @@ import { scanImagesFromFolder, groupImagesByMonth } from "@/lib/gallery";
 import { Badge } from "@/components/ui/badge";
 import GalleryGrid from "@/components/gallery-grid";
 
-/** Calculate Nanu's age at a given date */
-function nanuAgeAt(date: Date): number {
+/** Calculate Manu's age at a given date */
+function manuAgeAt(date: Date): number {
     const birthday = new Date(2019, 2, 25); // March 25, 2019
     let age = date.getFullYear() - birthday.getFullYear();
     const monthDiff = date.getMonth() - birthday.getMonth();
@@ -25,7 +25,7 @@ export default function DrawingsPage() {
             src: img.src,
             filename: img.filename,
             dateFormatted: img.dateFormatted,
-            badge: img.date ? `Age ${nanuAgeAt(img.date)}` : undefined,
+            badge: img.date ? `Age ${manuAgeAt(img.date)}` : undefined,
         })),
     }));
 
@@ -34,7 +34,7 @@ export default function DrawingsPage() {
         src: img.src,
         filename: img.filename,
         dateFormatted: img.dateFormatted,
-        badge: img.date ? `Age ${nanuAgeAt(img.date)}` : undefined,
+        badge: img.date ? `Age ${manuAgeAt(img.date)}` : undefined,
     }));
 
     return (
@@ -42,10 +42,10 @@ export default function DrawingsPage() {
             <div className="max-w-5xl mx-auto">
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-bold tracking-tight text-purple-800 mb-4">
-                        Nanu&apos;s Drawings 🎨
+                        Manu&apos;s Drawings 🎨
                     </h1>
                     <p className="text-xl text-purple-400">
-                        Masterpieces by the one and only artist — Nanu! 🖌️
+                        Masterpieces by the one and only artist — Manu! 🖌️
                     </p>
                     {drawings.length > 0 && (
                         <div className="flex justify-center gap-3 mt-4">
@@ -63,7 +63,7 @@ export default function DrawingsPage() {
                         <div className="gallery-empty-icon">🎨</div>
                         <h3>No drawings yet!</h3>
                         <p>
-                            Drop Nanu&apos;s artwork into the <code>public/drawings/</code> folder.
+                            Drop Manu&apos;s artwork into the <code>public/drawings/</code> folder.
                             Name them like <code>IMG_20190614_220013.jpg</code> and
                             dates will be extracted automatically!
                         </p>

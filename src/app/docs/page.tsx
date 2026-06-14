@@ -21,9 +21,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "How We Built This — Nanu's World Docs",
+  title: "How We Built This — Manu's Art World Docs",
   description:
-    "Technical documentation for Nanu's World: how the AI chatbot, API endpoints, and blog platform were designed and built.",
+    "Technical documentation for Manu's Art World: how the AI chatbot, API endpoints, and blog platform were designed and built.",
 };
 
 /* ────────────────────────────── helpers ────────────────────────────── */
@@ -199,7 +199,7 @@ export default function DocsPage() {
           </h1>
           <p className="text-xl text-purple-500 max-w-2xl mx-auto">
             A behind-the-scenes look at the tech, AI integrations, and design
-            decisions that power Nanu&apos;s World.
+            decisions that power Manu&apos;s World.
           </p>
         </section>
 
@@ -275,7 +275,7 @@ export default function DocsPage() {
           <SectionHeading
             emoji="🤖"
             title="AI Chatbot"
-            subtitle="How the &quot;Ask About Nanu&quot; chat widget works end-to-end"
+            subtitle="How the &quot;Ask About Manu&quot; chat widget works end-to-end"
           />
 
           {/* Architecture flow */}
@@ -342,7 +342,7 @@ export default function DocsPage() {
               </code>{" "}
               directory (profile, timeline, ask-nanu Q&amp;A, letters) and
               compiles them into a rich system prompt. This gives the model
-              factual knowledge about Nanu without needing a vector database.
+              factual knowledge About Manu without needing a vector database.
             </p>
             <CodeBlock
               title="api/chat/route.ts — Knowledge loading"
@@ -350,7 +350,7 @@ export default function DocsPage() {
 const blogContext = loadBlogContext();
 
 // Injected into the system prompt:
-system: \`You are the friendly AI assistant for "Nanu's World"...
+system: \`You are the friendly AI assistant for "Manu's Art World"...
 ---
 # KNOWLEDGE BASE
 \${blogContext}
@@ -365,7 +365,7 @@ system: \`You are the friendly AI assistant for "Nanu's World"...
               Tool Calling — sendUserData
             </h3>
             <p className="text-purple-600 text-sm leading-relaxed">
-              When a visitor wants to send a message to Dad, the model
+              When a visitor wants to Send a message, the model
               autonomously invokes the{" "}
               <code className="px-1.5 py-0.5 bg-purple-100 rounded text-purple-700 text-xs font-mono">
                 sendUserData
@@ -420,7 +420,7 @@ system: \`You are the friendly AI assistant for "Nanu's World"...
               code={`curl -X POST https://nanu.kprsnt.in/api/chat \\
   -H "Content-Type: application/json" \\
   -d '{
-    "messages": [{"role": "user", "content": "Tell me a fun fact about Nanu!"}]
+    "messages": [{"role": "user", "content": "Tell me a fun fact About Manu!"}]
   }'`}
             />
 
@@ -432,7 +432,7 @@ import json
 
 response = requests.post(
     "https://nanu.kprsnt.in/api/chat",
-    json={"messages": [{"role": "user", "content": "Hi Nanu!"}]},
+    json={"messages": [{"role": "user", "content": "Hi Manu!"}]},
     stream=True
 )
 
@@ -510,7 +510,7 @@ while (true) {
               {
                 emoji: "⚡",
                 title: "Quick Actions",
-                desc: "Suggested prompts ('Who is Nanu?', 'Tell me a fun fact', 'Send a message to Dad') for zero-friction start.",
+                desc: "Suggested prompts ('Who is Manu?', 'Tell me a fun fact', 'Send a message') for zero-friction start.",
               },
               {
                 emoji: "🔄",

@@ -1,6 +1,6 @@
 import { getBlogPosts } from "@/lib/blogs";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nanus-world.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://manus-art.vercel.app";
 
 export async function GET() {
     const posts = getBlogPosts();
@@ -22,9 +22,9 @@ export async function GET() {
     const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nanu's World 🌍</title>
+    <title>Manu's Art World 🎨</title>
     <link>${SITE_URL}</link>
-    <description>A fun digital scrapbook of Nanu's adventures, funny quotes, and memories — created by Dad with love ❤️</description>
+    <description>A magical showcase of Manu's drawings, paintings, and creative adventures — where art comes alive! 🖌️</description>
     <language>en</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml" />

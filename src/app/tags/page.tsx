@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Tag, Clock } from "lucide-react";
 
 export const metadata = {
-    title: "Tags — Nanu's World 🏷️",
-    description: "Browse all story categories and tags from Nanu's World",
+    title: "Tags — Manu's Art World 🏷️",
+    description: "Browse all story categories and tags from Manu's Art World",
 };
 
 export default function TagsPage() {
@@ -35,7 +35,7 @@ export default function TagsPage() {
                         Tags & Categories 🏷️
                     </h1>
                     <p className="text-xl text-purple-400 mb-8">
-                        Browse Nanu&apos;s stories by topic!
+                        Browse Manu&apos;s stories by topic!
                     </p>
 
                     {/* Tag cloud */}

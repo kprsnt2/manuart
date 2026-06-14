@@ -32,7 +32,7 @@ export default function GalleryPage() {
                         Photo Gallery 📸
                     </h1>
                     <p className="text-xl text-purple-400">
-                        Snapshots of Nanu&apos;s adventures, smiles, and everything in between!
+                        Snapshots of Manu&apos;s adventures, smiles, and everything in between!
                     </p>
                     {photos.length > 0 && (
                         <div className="flex justify-center gap-3 mt-4">

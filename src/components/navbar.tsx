@@ -2,16 +2,17 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X, Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
     { href: "/", label: "Home", emoji: "🏠" },
-    { href: "/blog", label: "Stories", emoji: "📖" },
-    { href: "/timeline", label: "Timeline", emoji: "🌱" },
-    { href: "/gallery", label: "Gallery", emoji: "📸" },
     { href: "/drawings", label: "Drawings", emoji: "🎨" },
-    { href: "/ask-nanu", label: "Ask Nanu", emoji: "🗣️" },
+    { href: "/blog", label: "Stories", emoji: "📖" },
+    { href: "/gallery", label: "Gallery", emoji: "📸" },
+    { href: "/timeline", label: "Timeline", emoji: "🌱" },
+    { href: "/ai-studio", label: "AI Studio", emoji: "🪄" },
+    { href: "/ask-manu", label: "Ask Manu", emoji: "🗣️" },
     { href: "/tags", label: "Tags", emoji: "🏷️" },
     { href: "/games/train-crash", label: "Games", emoji: "🎮" },
     { href: "/docs", label: "Docs", emoji: "📚" },
@@ -26,8 +27,8 @@ export default function Navbar() {
                 <div className="flex justify-between items-center h-14">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 font-black text-xl text-purple-700">
-                        <Sparkles className="w-5 h-5 text-yellow-500" />
-                        Nanu&apos;s World
+                        <Palette className="w-5 h-5 text-pink-500" />
+                        Manu&apos;s Art World
                     </Link>
 
                     {/* Desktop nav */}

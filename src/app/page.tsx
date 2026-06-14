@@ -1,25 +1,26 @@
 import Link from "next/link";
 import profile from "../../content/profile.json";
-import { getBlogPosts, getNanuAge } from "@/lib/blogs";
+import { getBlogPosts, getManuAge } from "@/lib/blogs";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github, ArrowRight, Heart, Sparkles, Clock, Bot } from "lucide-react";
+import { Github, ArrowRight, Heart, Sparkles, Clock, Bot, Palette } from "lucide-react";
 import OnThisDay from "@/components/on-this-day";
 
 const sectionLinks = [
-  { href: "/blog", emoji: "📖", label: "Stories", description: "Funny adventures & memories" },
-  { href: "/timeline", emoji: "🌱", label: "Timeline", description: "Growth milestones" },
+  { href: "/drawings", emoji: "🎨", label: "Drawings", description: "Manu's artwork gallery" },
+  { href: "/blog", emoji: "📖", label: "Stories", description: "Tales behind the art" },
   { href: "/gallery", emoji: "📸", label: "Gallery", description: "Photo memories" },
-  { href: "/drawings", emoji: "🎨", label: "Drawings", description: "Nanu's artwork" },
-  { href: "/ask-nanu", emoji: "🗣️", label: "Ask Nanu", description: "Yearly Q&A tracker" },
+  { href: "/timeline", emoji: "🌱", label: "Timeline", description: "Growth milestones" },
+  { href: "/ai-studio", emoji: "🪄", label: "AI Studio", description: "AI art magic!" },
+  { href: "/ask-manu", emoji: "🗣️", label: "Ask Manu", description: "Yearly Q&A tracker" },
   { href: "/tags", emoji: "🏷️", label: "Tags", description: "Browse by category" },
-  { href: "/games/train-crash", emoji: "🎮", label: "Games", description: "Train crash & more!" },
+  { href: "/games/train-crash", emoji: "🎮", label: "Games", description: "Fun games!" },
 ];
 
 export default function Home() {
   const recentBlogs = getBlogPosts().slice(0, 3);
-  const nanuAge = getNanuAge();
+  const manuAge = getManuAge();
 
   return (
     <main className="min-h-screen px-6 py-12 md:py-20">
@@ -29,12 +30,12 @@ export default function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "Nanu's World",
-            "url": process.env.NEXT_PUBLIC_SITE_URL || "https://nanus-world.vercel.app",
+            "name": "Manu's Art World",
+            "url": process.env.NEXT_PUBLIC_SITE_URL || "https://manus-art.vercel.app",
             "description": profile.tagline,
             "author": {
               "@type": "Person",
-              "name": "Prashanth (Dad)"
+              "name": "Family"
             }
           })
         }}
@@ -43,9 +44,9 @@ export default function Home() {
 
         {/* Hero Section */}
         <section className="text-center space-y-6 py-4">
-          <div className="text-6xl mb-4">🌟</div>
+          <div className="text-6xl mb-4">🎨</div>
           <h1 className="text-5xl md:text-7xl font-black tracking-tight fun-gradient">
-            Nanu&apos;s World
+            Manu&apos;s Art World
           </h1>
           <p className="text-xl md:text-2xl text-purple-600 font-semibold">
             {profile.tagline}
@@ -56,10 +57,13 @@ export default function Home() {
 
           <div className="flex flex-wrap justify-center gap-3 pt-4">
             <Badge className="text-base px-4 py-2 bg-purple-100 text-purple-700 border-purple-200">
-              <Sparkles className="w-4 h-4 mr-2" /> {nanuAge} years old
+              <Sparkles className="w-4 h-4 mr-2" /> {manuAge} years old
             </Badge>
             <Badge className="text-base px-4 py-2 bg-pink-100 text-pink-700 border-pink-200">
-              <Heart className="w-4 h-4 mr-2" /> Created by Dad with love
+              <Palette className="w-4 h-4 mr-2" /> Little Artist Extraordinaire
+            </Badge>
+            <Badge className="text-base px-4 py-2 bg-yellow-100 text-yellow-700 border-yellow-200">
+              <Heart className="w-4 h-4 mr-2" /> Created with love
             </Badge>
           </div>
 
@@ -67,19 +71,19 @@ export default function Home() {
             <div className="pt-2">
               <Button asChild variant="outline" size="sm" className="border-purple-200 text-purple-600 hover:bg-purple-50">
                 <Link href={profile.socials.github} target="_blank">
-                  <Github className="w-4 h-4 mr-2" /> Dad&apos;s GitHub
+                  <Github className="w-4 h-4 mr-2" /> GitHub
                 </Link>
               </Button>
             </div>
           )}
         </section>
 
-        {/* Nanu's Favorites */}
+        {/* Manu's Favorites */}
         <section className="space-y-6">
           <h2 className="text-3xl font-bold tracking-tight text-center text-purple-800">
-            Nanu&apos;s Favorite Things ⭐
+            Manu&apos;s Favorite Things ⭐
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {profile.favorites.map((fav: { emoji: string; label: string }, i: number) => (
               <Card key={i} className="card-bounce bg-white border-purple-100 text-center shadow-sm">
                 <CardContent className="pt-6 pb-4">
@@ -94,9 +98,9 @@ export default function Home() {
         {/* Explore Sections */}
         <section className="space-y-6">
           <h2 className="text-3xl font-bold tracking-tight text-center text-purple-800">
-            Explore Nanu&apos;s World 🗺️
+            Explore Manu&apos;s World 🗺️
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {sectionLinks.map((section) => (
               <Link key={section.href} href={section.href}>
                 <Card className="card-bounce bg-white border-purple-100 shadow-sm h-full hover:border-purple-300 transition-colors">
@@ -171,7 +175,7 @@ export default function Home() {
               <Card className="bg-white border-purple-100 shadow-sm">
                 <CardContent className="py-12 text-center">
                   <div className="text-4xl mb-4">✨</div>
-                  <p className="text-purple-400 text-lg">No stories yet! Dad needs to write some adventures... 📝</p>
+                  <p className="text-purple-400 text-lg">No stories yet! Time to start drawing and writing! 📝🎨</p>
                 </CardContent>
               </Card>
             )}
@@ -180,7 +184,7 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="text-center py-8 text-purple-400 text-sm">
-          <p>Made with ❤️ by Dad for Nanu • Powered by AI magic ✨</p>
+          <p>Made with ❤️ for Manu • Powered by AI magic ✨</p>
         </footer>
       </div>
     </main>

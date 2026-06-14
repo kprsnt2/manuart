@@ -1,32 +1,17 @@
 {
-  "name": "Nanu",
-  "tagline": "Explorer, Dreamer & Chief Mischief Officer 🚀",
-  "about": "This is Nanu's corner of the internet! A place where all the funny things he says, the adventures he goes on, and the cool stuff he learns are written down forever. Created by Dad with love ❤️ so that one day Nanu can come back and read all about his awesome childhood.",
+  "name": "Manu",
+  "tagline": "Little Artist, Big Dreamer & Creative Genius 🎨",
+  "about": "Welcome to Manu's Art World! This is where all of Manu's beautiful drawings, creative adventures, and artistic journey are showcased forever. Created with love so that one day Manu can look back at how her amazing art journey began! ❤️",
   "birthday": "2019-03-25",
-  "createdBy": "Dad (Prashanth)",
+  "createdBy": "Family",
   "socials": {
     "github": "https://github.com/kprsnt2/nanublog"
   },
   "favorites": [
-    {
-      "emoji": "🚗",
-      "label": "Car"
-    },
-    {
-      "emoji": "🚌",
-      "label": "Bus"
-    },
-    {
-      "emoji": "🚂",
-      "label": "Train"
-    },
-    {
-      "emoji": "🚛",
-      "label": "Truck"
-    },
-    {
-      "emoji": "⭐",
-      "label": "Roblox"
-    }
+    { "emoji": "🎨", "label": "Drawing" },
+    { "emoji": "🌈", "label": "Colors" },
+    { "emoji": "🦋", "label": "Butterflies" },
+    { "emoji": "🌸", "label": "Flowers" },
+    { "emoji": "⭐", "label": "Stars" }
   ]
 }

@@ -21,18 +21,35 @@ const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.heic'];
  * Looks for YYYYMMDD pattern after any separator (_, -, or nothing).
  */
 function extractDateFromFilename(filename: string): Date | null {
-  // Match YYYYMMDD after underscore, dash, or directly after letters (e.g. IMG20190721)
-  const match = filename.match(/(?:^|[_\-]|[A-Za-z])(\d{4})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])(?:[_\-.]|\d)/);
-  if (match) {
-    const year = parseInt(match[1]);
-    const month = parseInt(match[2]) - 1; // JS months are 0-indexed
-    const day = parseInt(match[3]);
-    const date = new Date(year, month, day);
-    // Sanity check - only accept dates between 2015 and 2030
+  // 1. Try to match YYYY followed by 2 digits and 2 digits (8 digits total, optionally separated by _ or -)
+  const match8 = filename.match(/(?:^|[_\-]|[A-Za-z])(\d{4})[_\-]?(\d{2})[_\-]?(\d{2})/);
+  if (match8) {
+    const year = parseInt(match8[1]);
+    const part1 = parseInt(match8[2]);
+    const part2 = parseInt(match8[3]);
     if (year >= 2015 && year <= 2030) {
-      return date;
+      // Case A: YYYYMMDD (part1 is month 1-12, part2 is day 1-31)
+      if (part1 >= 1 && part1 <= 12 && part2 >= 1 && part2 <= 31) {
+        return new Date(year, part1 - 1, part2);
+      }
+      // Case B: YYYYDDMM (part1 is day 13-31, part2 is month 1-12)
+      if (part1 > 12 && part1 <= 31 && part2 >= 1 && part2 <= 12) {
+        return new Date(year, part2 - 1, part1);
+      }
     }
   }
+
+  // 2. Try to match YYYY followed by 1 digit and 2 digits (7 digits total, e.g. 2021401 -> 2021-04-01)
+  const match7 = filename.match(/(?:^|[_\-]|[A-Za-z])(\d{4})[_\-]?(\d{1})[_\-]?(\d{2})/);
+  if (match7) {
+    const year = parseInt(match7[1]);
+    const month = parseInt(match7[2]) - 1; // JS month is 0-indexed
+    const day = parseInt(match7[3]);
+    if (year >= 2015 && year <= 2030 && month >= 0 && month <= 11 && day >= 1 && day <= 31) {
+      return new Date(year, month, day);
+    }
+  }
+
   return null;
 }
 

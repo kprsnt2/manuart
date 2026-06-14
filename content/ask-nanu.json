@@ -1,39 +1,39 @@
 {
   "questions": [
-    "What's your favorite food?",
-    "What do you want to be when you grow up?",
+    "What's your favorite thing to draw?",
+    "What colors do you like most?",
     "Who's your best friend?",
-    "What's your favorite color?",
+    "What do you want to be when you grow up?",
     "What makes you happy?",
-    "What's your favorite animal?",
-    "What's the funniest thing you've ever seen?",
-    "What's your favorite thing to do with Dad?"
+    "What's your favorite animal to draw?",
+    "What's the most fun thing you've ever drawn?",
+    "What's your favorite thing about art class?"
   ],
   "answers": {
     "2025": {
       "age": 5,
       "responses": [
-        "Biryani! And chocolate cake!",
-        "A bus driver. No wait, a truck driver!",
-        "Ruvansh from my class",
-        "Blue! No, red! Both!",
-        "Playing with bus simulator game and watching round round(means rhymes)",
-        "Tiger! Roarrrr!",
-        "road side driving mistakes 😂",
-        "Going for a drive in the car!"
+        "Butterflies! With big colorful wings! 🦋",
+        "Pink and purple and rainbow!",
+        "Ananya from my class",
+        "An artist! I want to paint BIG paintings!",
+        "Drawing pictures for everyone!",
+        "Cats! They're so cute to draw! 🐱",
+        "I drew a HUGE rainbow that covered the whole page!",
+        "When teacher says my drawing is beautiful! 😊"
       ]
     },
     "2026": {
       "age": 6,
       "responses": [
-        "Still biryani. Always biryani.",
-        "A train & bus driver! Because trains are HUGE!",
-        "Arush, Purvansh and also Hasan now",
-        "Rainbow. Final answer.",
-        "Getting Ice cream",
-        "Dog - it changes",
-        "Roblox, crashing the vehicles",
-        "Go to shop and buy coke - especially tin"
+        "Flowers and unicorns now! 🌸🦄",
+        "Still rainbow! But also gold and silver!",
+        "Ananya and also Priya now",
+        "A famous artist! Like the ones in museums!",
+        "When people put my drawings on the fridge!",
+        "Now I like drawing dogs too! 🐕",
+        "I made a whole comic book with stories!",
+        "Mixing colors to make NEW colors! 🎨"
       ]
     }
   }

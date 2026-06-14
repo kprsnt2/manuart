@@ -1,5 +1,5 @@
 import lettersData from "../../../content/letters.json";
-import { getNanuAge } from "@/lib/blogs";
+import { getManuAge } from "@/lib/blogs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Lock, Heart } from "lucide-react";
 
@@ -12,23 +12,23 @@ interface Letter {
 
 export default function LettersPage() {
     const letters: Letter[] = lettersData;
-    const nanuAge = getNanuAge();
+    const manuAge = getManuAge();
 
     return (
         <main className="min-h-screen px-6 py-12 md:py-20">
             <div className="max-w-3xl mx-auto">
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-bold tracking-tight text-purple-800 mb-4">
-                        Letters to Future Nanu 💌
+                        Letters to Future Manu 💌
                     </h1>
                     <p className="text-xl text-purple-400 max-w-2xl mx-auto">
-                        Messages from Dad, sealed with love — waiting for the right moment to be opened.
+                        Messages sealed with love — waiting for the right moment to be opened.
                     </p>
                 </div>
 
                 <div className="space-y-6">
                     {letters.map((letter, i) => {
-                        const isUnlocked = nanuAge >= letter.targetAge;
+                        const isUnlocked = manuAge >= letter.targetAge;
 
                         return (
                             <Card
@@ -49,7 +49,7 @@ export default function LettersPage() {
                                         <span className="text-3xl">{isUnlocked ? "📨" : "✉️"}</span>
                                         <div>
                                             <h3 className={`font-bold text-lg ${isUnlocked ? "text-purple-800" : "text-gray-500"}`}>
-                                                {isUnlocked ? letter.title : `For Nanu at Age ${letter.targetAge}`}
+                                                {isUnlocked ? letter.title : `For Manu at Age ${letter.targetAge}`}
                                             </h3>
                                             <p className="text-sm text-purple-400">
                                                 Written on{" "}
@@ -83,7 +83,7 @@ export default function LettersPage() {
                                                 🔒 Open when you&apos;re {letter.targetAge}!
                                             </p>
                                             <p className="text-gray-300 text-sm mt-1">
-                                                {letter.targetAge - nanuAge} more year{letter.targetAge - nanuAge !== 1 ? "s" : ""} to go...
+                                                {letter.targetAge - manuAge} more year{letter.targetAge - manuAge !== 1 ? "s" : ""} to go...
                                             </p>
                                         </div>
                                     )}

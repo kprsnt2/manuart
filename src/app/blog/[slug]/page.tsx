@@ -25,19 +25,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const post = await getBlogPostBySlug(slug);
     if (!post) return {};
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nanus-world.vercel.app";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://manus-art.vercel.app";
 
     return {
-        title: `${post.title} — Nanu's World`,
+        title: `${post.title} — Manu's Art World`,
         description: post.excerpt,
         openGraph: {
             title: post.title,
             description: post.excerpt,
             type: "article",
             publishedTime: post.date,
-            authors: ["Dad (Prashanth)"],
+            authors: ["Family"],
             tags: post.tags,
-            siteName: "Nanu's World",
+            siteName: "Manu's Art World",
             url: `${siteUrl}/blog/${slug}`,
         },
         twitter: {
@@ -69,6 +69,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     const illustrationUrl = `/illustrations/${slug}.png`;
     const hasIllustration = fs.existsSync(path.join(process.cwd(), "public", "illustrations", `${slug}.png`));
 
+    const manuAge = post.manuAge || post.nanuAge;
+
     return (
         <main className="min-h-screen px-6 py-12 md:py-20">
             <article className="max-w-3xl mx-auto space-y-8">
@@ -83,13 +85,13 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                             "author": [
                                 {
                                     "@type": "Person",
-                                    "name": "Prashanth (Dad)"
+                                    "name": "Family"
                                 }
                             ],
                             "datePublished": post.date,
                             "mainEntityOfPage": {
                                 "@type": "WebPage",
-                                "@id": `${process.env.NEXT_PUBLIC_SITE_URL || "https://nanus-world.vercel.app"}/blog/${slug}`
+                                "@id": `${process.env.NEXT_PUBLIC_SITE_URL || "https://manus-art.vercel.app"}/blog/${slug}`
                             }
                         })
                     }}
@@ -105,9 +107,9 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                         {post.category && (
                             <Badge variant="secondary" className="text-sm">{post.category}</Badge>
                         )}
-                        {post.nanuAge && (
+                        {manuAge && (
                             <Badge variant="outline" className="text-sm border-purple-200 text-purple-500">
-                                📅 Nanu was {post.nanuAge} years old
+                                📅 Manu was {manuAge} years old
                             </Badge>
                         )}
                         {post.readingTime && (
@@ -136,8 +138,15 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                     </time>
                 </div>
 
+                {/* Original Drawing */}
+                {post.drawing && (
+                    <div className="rounded-2xl overflow-hidden border-2 border-purple-100 shadow-md max-h-[600px] flex items-center justify-center bg-purple-50/20 p-2">
+                        <img src={post.drawing} alt={`Original drawing by Manu: ${post.title}`} className="max-h-[580px] w-auto object-contain rounded-xl" />
+                    </div>
+                )}
+
                 {/* AI-generated illustration */}
-                {hasIllustration && (
+                {hasIllustration && !post.drawing && (
                     <div className="rounded-2xl overflow-hidden border-2 border-purple-100 shadow-md">
                         <img src={illustrationUrl} alt={`Illustration for ${post.title}`} className="w-full h-auto" />
                     </div>
@@ -183,14 +192,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 {/* Reactions */}
                 <Reactions slug={slug} />
 
-                {/* Dad's love note */}
+                {/* Love note */}
                 <div className="dads-note mt-12">
                     <div className="flex items-center gap-2 mb-2">
                         <Heart className="w-5 h-5 text-pink-500 fill-pink-500" />
-                        <span className="font-bold text-purple-700">From Dad</span>
+                        <span className="font-bold text-purple-700">With Love</span>
                     </div>
                     <p className="text-purple-600 text-sm italic">
-                        Every moment with you is an adventure, Nanu. This story is saved here forever, so you can come back and smile whenever you want. Love you, kiddo! ❤️
+                        Every drawing tells a story, Manu. Your art is saved here forever, so you can come back and see how amazing your creativity has always been. Keep painting the world beautiful! ❤️🎨
                     </p>
                 </div>
             </article>

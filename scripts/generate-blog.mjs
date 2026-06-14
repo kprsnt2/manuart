@@ -13,8 +13,8 @@ const POSTS_DIR = path.join(process.cwd(), 'content', 'blogs');
 if (!fs.existsSync(DRAFTS_DIR)) fs.mkdirSync(DRAFTS_DIR, { recursive: true });
 if (!fs.existsSync(POSTS_DIR)) fs.mkdirSync(POSTS_DIR, { recursive: true });
 
-// Calculate Nanu's current age from birthday
-function getNanuAge() {
+// Calculate Manu's current age from birthday
+function getManuAge() {
     const birthday = new Date(2019, 2, 25); // March 25, 2019
     const today = new Date();
     let age = today.getFullYear() - birthday.getFullYear();
@@ -69,10 +69,22 @@ function cleanupContent(content) {
     return content;
 }
 
-function injectAiModel(content, aiModel) {
+function injectAiModel(content, aiModel, draftData = {}) {
     // Insert aiModel field into the frontmatter
     const parsed = matter(content);
     parsed.data.aiModel = aiModel;
+
+    // Carry over fields from original draft
+    if (draftData.drawing) {
+        parsed.data.drawing = draftData.drawing;
+    }
+    if (draftData.manu_said || draftData.nanu_said) {
+        parsed.data.manu_said = draftData.manu_said || draftData.nanu_said;
+    }
+    if (draftData.family_note || draftData.dads_note) {
+        parsed.data.family_note = draftData.family_note || draftData.dads_note;
+    }
+
     // Ensure tags exist
     if (!parsed.data.tags && parsed.data.category) {
         parsed.data.tags = [parsed.data.category];
@@ -92,11 +104,11 @@ async function generateTeluguTranslation(englishContent, baseName) {
     const prompt = `Translate the following English blog post into Telugu (తెలుగు). 
 
 RULES:
-- Translate the content naturally into Telugu, keeping the fun and funny tone
+- Translate the content naturally into Telugu, keeping the fun and artistic tone
 - Keep emojis as-is
 - Keep the YAML frontmatter in English (title, date, excerpt, category fields stay in English)
 - Add a new frontmatter field: language: "te"
-- Names like "Nanu" and "Dad" should stay in English
+- Names like "Manu" should stay in English
 - The Telugu should feel natural and conversational, not formal/literary
 - Keep any blockquotes or special formatting
 
@@ -119,7 +131,7 @@ Output exactly the markdown with frontmatter (no wrapping like \`\`\`markdown).`
 
 async function processDrafts() {
     const files = fs.readdirSync(DRAFTS_DIR);
-    const nanuAge = getNanuAge();
+    const manuAge = getManuAge();
 
     for (const file of files) {
         if (!file.endsWith('.md') && !file.endsWith('.txt')) continue;
@@ -141,73 +153,81 @@ async function processDrafts() {
 
         // Parse frontmatter if present
         let draftContent = rawContent;
-        let nanuSaid = '';
-        let dadsNote = '';
+        let manuSaid = '';
+        let familyNote = '';
         let category = '';
+        let draftData = {};
 
         try {
             const parsed = matter(rawContent);
+            draftData = parsed.data || {};
             draftContent = parsed.content;
-            nanuSaid = parsed.data.nanu_said || '';
-            dadsNote = parsed.data.dads_note || '';
+            manuSaid = parsed.data.manu_said || parsed.data.nanu_said || '';
+            familyNote = parsed.data.family_note || parsed.data.dads_note || '';
             category = parsed.data.category || '';
         } catch {
             // If no frontmatter, use raw content
         }
 
-        const nanuQuoteInstruction = nanuSaid
-            ? `\n\nIMPORTANT: Nanu actually said this: "${nanuSaid}" — You MUST weave this quote naturally into the blog post in a funny and highlighted way. Use a special callout or blockquote format like:\n> 🗣️ **Nanu said:** "${nanuSaid}"\nMake it a centerpiece moment in the story!`
+        const manuQuoteInstruction = manuSaid
+            ? `\n\nIMPORTANT: Manu actually said this: "${manuSaid}" — You MUST weave this quote naturally into the blog post in a funny and highlighted way. Use a special callout or blockquote format like:\n> 🗣️ **Manu said:** "${manuSaid}"\nMake it a centerpiece moment in the story!`
             : '';
 
-        const dadsNoteInstruction = dadsNote
-            ? `\n\nAt the very end, add a "📝 Dad's Note" section with this message from Dad: "${dadsNote}"`
-            : '\n\nAt the very end, add a "📝 Dad\'s Note" section with a short, loving message from Dad about this moment or memory.';
+        const familyNoteInstruction = familyNote
+            ? `\n\nAt the very end, add a "📝 Family Note" section with this message: "${familyNote}"`
+            : '\n\nAt the very end, add a "📝 Family Note" section with a short, loving message about this moment or artwork.';
 
         const categoryInstruction = category
             ? `\nThe category for this post is: "${category}". Include it in the frontmatter as 'category'.`
-            : '\nChoose a fun category that fits this post (e.g., "Funny Moments", "School Adventures", "Big Questions", "Family Fun", "Discoveries"). Include it in the frontmatter as \'category\'.';
+            : '\nChoose a fun category that fits this post (e.g., "Art Adventures", "Creative Moments", "School Art", "Family Fun", "Masterpieces"). Include it in the frontmatter as \'category\'.';
 
-        const systemPrompt = `You are a funny, warm, and loving storyteller writing a blog post for a digital scrapbook about a kid named Nanu. Nanu is currently ${nanuAge} years old.
+        const drawing = draftData.drawing || '';
+        const drawingInstruction = drawing
+            ? `\n\nIMPORTANT: This blog post is based on Manu's drawing located at "${drawing}". You should talk about this drawing in detail (describing its elements like the Nandi bull, horn decorations, bells, the date 14-Feb-26, the signature "Qi", etc. if applicable) and explain what makes it special. Also, you can display the drawing image in the post by using the markdown image syntax: ![Manu's Drawing](${drawing})`
+            : '';
 
-This blog is maintained by Nanu's Dad (Prashanth) as a fun record of Nanu's childhood — the hilarious things he says, his adventures, his discoveries, and everyday moments. One day when Nanu grows up, he'll read these and smile (or cringe 😄).
+        const systemPrompt = `You are a fun, warm, and loving storyteller writing a blog post for a digital art showcase about a young artist named Manu. Manu is currently ${manuAge} years old.
+
+This blog showcases Manu's drawings and paintings — the beautiful things she creates, her art adventures, and the stories behind each artwork. The blog is maintained with love so that one day Manu can look back at her amazing art journey!
 
 YOUR WRITING STYLE:
-- Write in a warm, funny, storytelling tone — like a Dad telling his friends about his kid's latest antics
+- Write in a warm, fun, storytelling tone — like family telling friends about their little artist's latest creations
 - Use simple, fun language with occasional emojis (but don't overdo it — 3-5 per post max)
-- Be genuinely funny — use light humor, playful exaggeration, and witty observations
+- Be genuinely fun — use light humor, playful descriptions, and artistic observations
 - Make it feel personal and heartfelt, not generic
 - Keep paragraphs short and punchy
 - Use headings to break up the story
-- Nanu is ${nanuAge} years old — make sure the content feels age-appropriate and references his age naturally
+- Manu is ${manuAge} years old — make sure the content feels age-appropriate and references her age naturally
 
 FRONTMATTER FORMAT:
 The blog must include markdown frontmatter with these fields:
 - 'title': A fun, catchy title (wrapped in double quotes)
 - 'date': Today's date in ISO format "${new Date().toISOString()}" (wrapped in double quotes)
-- 'excerpt': A short funny one-liner about the post (wrapped in double quotes)
+- 'excerpt': A short fun one-liner about the post (wrapped in double quotes)
 - 'category': A fun category label (wrapped in double quotes)
-- 'nanuAge': ${nanuAge}
-- 'illustration_prompt': A short prompt (wrapped in double quotes) describing a fun cartoon illustration for this post (e.g., "A 6-year-old boy riding a T-Rex to school with a backpack, cartoon style, colorful")
-- 'tags': An array of relevant tags for this post (e.g., ["Funny Moments", "School", "Questions"])
+- 'manuAge': ${manuAge}
+- 'illustration_prompt': A short prompt (wrapped in double quotes) describing a fun cartoon illustration for this post (e.g., "A ${manuAge}-year-old girl painting a colorful butterfly, cartoon style, bright colors")
+- 'tags': An array of relevant tags for this post (e.g., ["Art Adventures", "Butterflies", "Drawings"])
 
 IMPORTANT: You MUST wrap ALL string values in the YAML frontmatter in double quotes to prevent YAML parsing errors.
-${nanuQuoteInstruction}
-${dadsNoteInstruction}
+${manuQuoteInstruction}
+${familyNoteInstruction}
 ${categoryInstruction}
+${drawingInstruction}
 
-Here are Dad's notes/draft about what happened:
+Here are the notes/draft about what happened:
 ---
 ${draftContent}
 ---
 
-Output exactly the markdown with the frontmatter (no wrapping markdown formatting like \`\`\`markdown, just the raw text). Make it awesome! 🎉`;
+Output exactly the markdown with the frontmatter (no wrapping markdown formatting like \`\`\`markdown, just the raw text). Make it awesome! 🎉🎨`;
 
         try {
             let finalContent = await generateAI(systemPrompt);
             finalContent = cleanupContent(finalContent);
 
-            // Inject the AI model name into frontmatter
-            finalContent = injectAiModel(finalContent, currentAIModel);
+            // Inject the AI model name and draft data into frontmatter
+            finalContent = injectAiModel(finalContent, currentAIModel, draftData);
 
             fs.writeFileSync(postPath, finalContent, 'utf8');
             console.log(`Successfully generated ${postPath} (by ${currentAIModel})`);

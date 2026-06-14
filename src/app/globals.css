@@ -44,7 +44,7 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
-/* 🌈 Nanu's World — Bright, Playful Theme */
+/* 🌈 Manu's Art World — Bright, Playful Theme */
 :root {
   --radius: 1rem;
   --background: #FFF8F0;
@@ -129,7 +129,7 @@ body::before {
 .badge-family { background: #FFE4E6; color: #9F1239; }
 .badge-discovery { background: #F3E8FF; color: #6B21A8; }
 
-/* Nanu quote callout styling in blog posts */
+/* Manu quote callout styling in blog posts */
 .prose blockquote {
   border-left-color: #7C3AED !important;
   background: #F3E8FF;
@@ -138,7 +138,7 @@ body::before {
   font-style: normal !important;
 }
 
-/* Dad's Note section styling */
+/* Family Note section styling */
 .dads-note {
   background: linear-gradient(135deg, #FEF3C7, #FFE4E6);
   border-radius: 16px;

@@ -14,6 +14,8 @@ export interface BlogPost {
   content: string;
   htmlContent?: string;
   category?: string;
+  drawing?: string;
+  manuAge?: number;
   nanuAge?: number;
   readingTime?: number;
   tags?: string[];
@@ -46,7 +48,9 @@ export function getBlogPosts(): BlogPost[] {
         excerpt: matterResult.data.excerpt || '',
         content: matterResult.content,
         category: matterResult.data.category || '',
-        nanuAge: matterResult.data.nanuAge || undefined,
+        drawing: matterResult.data.drawing || '',
+        manuAge: matterResult.data.manuAge || matterResult.data.nanuAge || undefined,
+        nanuAge: matterResult.data.nanuAge || matterResult.data.manuAge || undefined,
         readingTime: calculateReadingTime(matterResult.content),
         tags: matterResult.data.tags || (matterResult.data.category ? [matterResult.data.category] : []),
         aiModel: matterResult.data.aiModel || matterResult.data.ai_model || '',
@@ -82,7 +86,9 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
     content: matterResult.content,
     htmlContent,
     category: matterResult.data.category || '',
-    nanuAge: matterResult.data.nanuAge || undefined,
+    drawing: matterResult.data.drawing || '',
+    manuAge: matterResult.data.manuAge || matterResult.data.nanuAge || undefined,
+    nanuAge: matterResult.data.nanuAge || matterResult.data.nanuAge || undefined,
     readingTime: calculateReadingTime(matterResult.content),
     tags: matterResult.data.tags || (matterResult.data.category ? [matterResult.data.category] : []),
     aiModel: matterResult.data.aiModel || matterResult.data.ai_model || '',
@@ -99,8 +105,8 @@ export function getAllTags(): string[] {
   return Array.from(tagSet).sort();
 }
 
-// Helper to calculate Nanu's current age
-export function getNanuAge(): number {
+// Helper to calculate Manu's current age
+export function getManuAge(): number {
   const birthday = new Date(2019, 2, 25); // March 25, 2019
   const today = new Date();
   let age = today.getFullYear() - birthday.getFullYear();
@@ -110,3 +116,6 @@ export function getNanuAge(): number {
   }
   return age;
 }
+
+// Keep backward compatibility
+export const getNanuAge = getManuAge;

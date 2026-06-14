@@ -17,7 +17,7 @@ export default function TimelinePage() {
             <div className="max-w-3xl mx-auto">
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-bold tracking-tight text-purple-800 mb-4">
-                        Nanu&apos;s Growth Timeline 🌱
+                        Manu&apos;s Growth Timeline 🌱
                     </h1>
                     <p className="text-xl text-purple-400">
                         Every big moment, every tiny step — they all matter! ✨
@@ -68,7 +68,7 @@ export default function TimelinePage() {
 
                 {/* Footer hint */}
                 <div className="text-center mt-12 text-purple-300 text-sm">
-                    <p>More milestones to come... Nanu&apos;s story is just getting started! 🚀</p>
+                    <p>More milestones to come... Manu&apos;s art journey is just getting started! 🚀🎨</p>
                 </div>
             </div>
         </main>

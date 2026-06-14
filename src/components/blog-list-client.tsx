@@ -57,7 +57,7 @@ export default function BlogListClient({ blogs }: { blogs: BlogPost[] }) {
                         <Link href="/"><ArrowLeft className="w-4 h-4 mr-2" /> Back home</Link>
                     </Button>
                     <h1 className="text-4xl font-bold tracking-tight mb-4 text-purple-800">
-                        Nanu&apos;s Stories 📖
+                        Manu&apos;s Stories 📖
                     </h1>
                     <p className="text-xl text-purple-600 mb-6">
                         All the funny, wild, and wonderful adventures — one story at a time! ✨

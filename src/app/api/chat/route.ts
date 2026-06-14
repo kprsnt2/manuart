@@ -14,7 +14,7 @@ function loadBlogContext(): string {
 
   try {
     const profile = JSON.parse(fs.readFileSync(path.join(contentDir, 'profile.json'), 'utf8'));
-    sections.push(`## About Nanu
+    sections.push(`## About Manu
 - Full name: ${profile.name}
 - Tagline: "${profile.tagline}"
 - About: ${profile.about}
@@ -32,16 +32,16 @@ function loadBlogContext(): string {
   } catch { /* skip */ }
 
   try {
-    const askNanu = JSON.parse(fs.readFileSync(path.join(contentDir, 'ask-nanu.json'), 'utf8'));
+    const askManu = JSON.parse(fs.readFileSync(path.join(contentDir, 'ask-nanu.json'), 'utf8'));
     const qaParts: string[] = [];
-    for (const [year, data] of Object.entries(askNanu.answers)) {
+    for (const [year, data] of Object.entries(askManu.answers)) {
       const yearData = data as { age: number; responses: string[] };
-      const qa = askNanu.questions.map((q: string, i: number) =>
+      const qa = askManu.questions.map((q: string, i: number) =>
         `  Q: ${q}\n  A: ${yearData.responses[i]}`
       ).join('\n');
       qaParts.push(`### Age ${yearData.age} (${year}):\n${qa}`);
     }
-    sections.push(`## Nanu's Q&A Responses\n${qaParts.join('\n')}`);
+    sections.push(`## Manu's Q&A Responses\n${qaParts.join('\n')}`);
   } catch { /* skip */ }
 
   try {
@@ -49,7 +49,22 @@ function loadBlogContext(): string {
     const letterText = letters.map((l: { targetAge: number; title: string; content: string }) =>
       `- Letter for age ${l.targetAge} ("${l.title}"): ${l.content}`
     ).join('\n');
-    sections.push(`## Dad's Time-Capsule Letters\n${letterText}`);
+    sections.push(`## Time-Capsule Letters\n${letterText}`);
+  } catch { /* skip */ }
+
+  // Load blog posts for additional context
+  try {
+    const blogsDir = path.join(contentDir, 'blogs');
+    if (fs.existsSync(blogsDir)) {
+      const blogFiles = fs.readdirSync(blogsDir).filter(f => f.endsWith('.md') && !f.endsWith('_te.md'));
+      const blogSummaries = blogFiles.map(file => {
+        const content = fs.readFileSync(path.join(blogsDir, file), 'utf8');
+        const titleMatch = content.match(/title:\s*"([^"]+)"/);
+        const excerptMatch = content.match(/excerpt:\s*"([^"]+)"/);
+        return `- ${titleMatch?.[1] || file}: ${excerptMatch?.[1] || ''}`;
+      }).join('\n');
+      sections.push(`## Blog Posts / Art Stories\n${blogSummaries}`);
+    }
   } catch { /* skip */ }
 
   return sections.join('\n\n');
@@ -73,30 +88,32 @@ export async function POST(req: Request) {
 
   const result = streamText({
     model: google('gemini-2.5-flash-lite'),
-    system: `You are the friendly, warm AI assistant for "Nanu's World" — a digital scrapbook blog created by Nanu's Dad (Prashanth).
+    system: `You are the friendly, warm AI assistant for "Manu's Art World" — a digital art showcase blog for a young artist named Manu.
 
-Your personality: enthusiastic, playful, family-friendly, and heartfelt. Use emojis sparingly but naturally. Keep answers concise but informative.
+Your personality: enthusiastic about art, playful, family-friendly, and encouraging. Use emojis sparingly but naturally. Keep answers concise but informative.
 
 IMPORTANT RULES:
-1. Answer questions about Nanu using ONLY the factual data below. Never invent facts not present in the data.
+1. Answer questions about Manu using ONLY the factual data below. Never invent facts not present in the data.
 2. If asked something not covered in the data, say so honestly and suggest they check the blog.
-3. If the user wants to send a message, feedback, or contact info to Dad, ALWAYS use the \`sendUserData\` tool.
+3. If the user wants to send a message, feedback, or contact info, ALWAYS use the \`sendUserData\` tool.
 4. Never share sensitive information or make up personal details beyond what's provided.
-5. Be age-appropriate — this is a family blog about a child.
+5. Be age-appropriate — this is a family blog about a child's art journey.
+6. When talking about Manu's art, be enthusiastic and encouraging!
+7. You can suggest checking out the AI Art Studio (/ai-studio) for AI-powered art features.
 
 ---
-# NANU'S WORLD — KNOWLEDGE BASE
+# MANU'S ART WORLD — KNOWLEDGE BASE
 
 ${blogContext}
 ---`,
     messages: modelMessages,
     tools: {
       sendUserData: {
-        description: 'Sends a name, message, and optional email to Dad so he can read it. Use this whenever someone wants to leave feedback, send a message, or share their contact info.',
+        description: 'Sends a name, message, and optional email so the family can read it. Use this whenever someone wants to leave feedback, send a message, or share their contact info.',
         parameters: z.object({
           name: z.string().describe('The name of the person leaving the message.'),
           email: z.string().email().optional().describe('Their email address, if provided.'),
-          message: z.string().describe('The actual message or feedback for Dad / about Nanu.'),
+          message: z.string().describe('The actual message or feedback about Manu / her art.'),
         }),
         execute: async ({ name, email, message }: { name: string; email?: string; message: string }) => {
           try {
@@ -108,7 +125,7 @@ ${blogContext}
               body: JSON.stringify({ name, email, message, source: 'ai-agent' }),
             });
             if (res.ok) {
-              return { success: true, detail: `Message from ${name} has been delivered to Dad! 💌` };
+              return { success: true, detail: `Message from ${name} has been delivered! 💌` };
             }
             return { success: false, detail: 'The endpoint returned an error. Please try again.' };
           } catch {
