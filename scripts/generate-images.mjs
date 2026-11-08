@@ -14,7 +14,7 @@ if (!fs.existsSync(ILLUSTRATIONS_DIR)) fs.mkdirSync(ILLUSTRATIONS_DIR, { recursi
 
 async function generateImageWithGemini(prompt) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
     const imagePrompt = `Generate a fun, colorful, child-friendly cartoon illustration: ${prompt}. Style: cute, bright colors, playful, no text in the image.`;
 
